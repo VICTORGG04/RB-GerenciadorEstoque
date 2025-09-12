@@ -1,0 +1,43 @@
+<div class="form-card">
+  <div class="form-card-header">
+    <h2>Editar Produto: <%= h @produto['nome'] %></h2>
+  </div>
+
+  <div class="form-card-body">
+    <form action="/produtos/<%= @produto['id'] %>/editar" method="POST">
+
+      <div class="form-group">
+        <label for="nome" class="form-label">Nome do Produto</label>
+        <input type="text" id="nome" name="nome" class="form-input" value="<%= h @produto['nome'] %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="codigo" class="form-label">Código / SKU</label>
+        <input type="text" id="codigo" name="codigo" class="form-input" value="<%= h @produto['codigo'] %>">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="quantidade" class="form-label">Quantidade</label>
+          <input type="number" id="quantidade" name="quantidade" class="form-input" value="<%= @produto['quantidade'] %>" required>
+        </div>
+
+        <div class="form-group">
+          <label for="preco" class="form-label">Preço (R$)</label>
+          <input type="text" id="preco" name="preco" class="form-input" value="<%= @produto['preco'] %>" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="categoria" class="form-label">Categoria</label>
+        <input type="text" id="categoria" name="categoria" class="form-input" value="<%= h @produto['categoria'] %>">
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-submit">Salvar Alterações</button>
+        <a href="/" class="btn-cancel">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>

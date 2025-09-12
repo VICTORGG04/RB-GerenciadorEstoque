@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adicionar Produto</title>
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/layout.css">
+  <link rel="stylesheet" href="/components.css">
+</head>
+<body>
+<h1>Adicionar Novo Produto</h1>
+<form action="/produtos" method="post" class="product-form">
+  <div class="form-category">
+    <h3>Informações Básicas</h3>
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+    </div>
+    <div class="form-group">
+      <label for="codigo">Código do Produto:</label>
+      <input type="text" id="codigo" name="codigo" required>
+    </div>
+  </div>
+
+  <div class="form-category">
+    <h3>Dados de Estoque</h3>
+    <div class="form-group">
+      <label for="quantidade">Quantidade:</label>
+      <input type="number" id="quantidade" name="quantidade" required>
+    </div>
+    <div class="form-group">
+      <label for="preco">Preço (R$):</label>
+      <input type="text" id="preco" name="preco" required>
+    </div>
+    <div class="form-group">
+      <label for="categoria">Categoria do Produto:</label>
+      <input type="text" id="categoria" name="categoria" placeholder="Ex: Eletrônicos, Livros" required>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="button button--primary">Adicionar Produto</button>
+    <a href="/" class="button button--back">Voltar</a>
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="d-flex justify-content-between align-items-center">
+    <h2>Relatório de Estoque Atual</h2>
+    <span class="badge" style="background-color: var(--cor-primaria-claro); color: var(--cor-primaria-escuro); padding: 10px;">
+      Total de Produtos: <%= @total_produtos %>
+    </span>
+  </div>
+  <hr style="margin: 1rem 0;">
+
+  <% if @produtos.empty? %>
+    <p>Nenhum produto em estoque para gerar o relatório.</p>
+  <% else %>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Categoria</th>
+          <th class="text-center">Quantidade</th>
+          <th class="text-end">Preço Unitário</th>
+          <th class="text-end">Valor Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @produtos.each do |produto| %>
+          <tr>
+            <td><%= h produto['nome'] %></td>
+            <td><%= h produto['categoria'] %></td>
+            <td class="text-center"><%= produto['quantidade'] %></td>
+            <td class="text-end">R$ <%= '%.2f' % produto['preco'] %></td>
+            <td class="text-end">R$ <%= '%.2f' % (produto['preco'] * produto['quantidade']) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+  <div class="alert mt-4" style="background-color: var(--cor-info-claro); color: #055160;">
+    <strong>Nota do Mestre:</strong> Esta página agora exibe um relatório completo do seu estoque. O próximo passo em sua jornada será implementar o registro de movimentações diárias para criar relatórios históricos.
+  </div>
+</div>

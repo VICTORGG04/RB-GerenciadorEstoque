@@ -1,0 +1,26 @@
+<div class="form-card">
+  <div class="form-card-header">
+    <h2>Importar Produtos de Arquivo</h2>
+  </div>
+
+  <div class="form-card-body">
+    <p>Selecione um arquivo de Nota Fiscal (.xml), CSV ou Excel (.xlsx) para adicionar produtos ao seu estoque de uma só vez.</p>
+    <hr style="margin: 1.5rem 0;">
+
+    <form action="/importar" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="arquivo" class="form-label">Selecione o arquivo:</label>
+        <input class="form-control form-control-lg" type="file" id="arquivo" name="arquivo" required>
+      </div>
+
+      <div class="alert alert-warning mt-4">
+        <strong>Atenção:</strong> Para planilhas, as colunas devem ter os cabeçalhos: <strong>Nome, Quantidade, Preço, Categoria, Código</strong>.
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-submit btn-success">Iniciar Importação</button>
+        <a href="/" class="btn-cancel">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>

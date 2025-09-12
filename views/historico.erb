@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Histórico de Relatórios</title>
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/layout.css">
+  <link rel="stylesheet" href="/components.css">
+</head>
+<body>
+<header>
+  <h1>📊 Histórico de Relatórios Semestrais</h1>
+  <nav>
+    <a href="/">Dashboard</a>
+    <a href="/produtos">Produtos</a>
+    <a href="/logout" class="logout">Sair</a>
+  </nav>
+</header>
+
+<main>
+  <% if @historico && !@historico.empty? %>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Início</th>
+        <th>Fim</th>
+        <th>Valor Total (R$)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @historico.each do |r| %>
+        <tr>
+          <td><%= r['id'] %></td>
+          <td><%= r['data_inicio'] %></td>
+          <td><%= r['data_fim'] %></td>
+          <td>R$ <%= '%.2f' % r['valor_total'] %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Nenhum relatório registrado.</p>
+  <% end %>
+</main>
+</body>
+</html>
