@@ -1,46 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Adicionar Produto</title>
-  <link rel="stylesheet" href="/base.css">
-  <link rel="stylesheet" href="/layout.css">
-  <link rel="stylesheet" href="/components.css">
-</head>
-<body>
-<h1>Adicionar Novo Produto</h1>
-<form action="/produtos" method="post" class="product-form">
-  <div class="form-category">
-    <h3>Informações Básicas</h3>
-    <div class="form-group">
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required>
-    </div>
-    <div class="form-group">
-      <label for="codigo">Código do Produto:</label>
-      <input type="text" id="codigo" name="codigo" required>
-    </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Lista de Produtos</h2>
+  <div>
+    <a href="/produtos/novo" class="btn btn-primary">Adicionar</a>
+    <a href="/importar" class="btn btn-success">Importar</a>
+    <button id="btn-editar" class="btn btn-info" disabled>Editar</button>
+    <form id="form-excluir-selecionados" action="/produtos/excluir" method="POST" style="display:inline;">
+      <button id="btn-excluir" class="btn btn-danger" disabled>Excluir</button>
+    </form>
   </div>
+</div>
 
-  <div class="form-category">
-    <h3>Dados de Estoque</h3>
-    <div class="form-group">
-      <label for="quantidade">Quantidade:</label>
-      <input type="number" id="quantidade" name="quantidade" required>
-    </div>
-    <div class="form-group">
-      <label for="preco">Preço (R$):</label>
-      <input type="text" id="preco" name="preco" required>
-    </div>
-    <div class="form-group">
-      <label for="categoria">Categoria do Produto:</label>
-      <input type="text" id="categoria" name="categoria" placeholder="Ex: Eletrônicos, Livros" required>
-    </div>
+<div class="card">
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th><input type="checkbox" id="select-all" class="form-check-input"></th>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Código</th>
+        <th>Qtd.</th>
+        <th>Preço Unit.</th>
+        <th>Categoria</th>
+        <th>Data</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @produtos.each do |produto| %>
+        <tr>
+          <td><input type="checkbox" name="produtos_ids[]" value="<%= produto['id'] %>" class="form-check-input produto-checkbox"></td>
+          <td><%= produto['id'] %></td>
+          <td><%= h produto['nome'] %></td>
+          <td><%= h produto['codigo'] %></td>
+          <td><%= produto['quantidade'] %></td>
+          <td>R$ <%= '%.2f' % produto['preco'] %></td>
+          <td><%= h produto['categoria'] %></td>
+          <td><%= Date.parse(produto['data_adicionado']).strftime('%d/%m/%Y') %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
-
-  <div class="form-actions">
-    <button type="submit" class="button button--primary">Adicionar Produto</button>
-    <a href="/" class="button button--back">Voltar</a>
-  </div>
-</form>
-</body>
-</html>
+</div>

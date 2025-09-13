@@ -1,17 +1,13 @@
-source 'http://rubygems.org'
+# frozen_string_literal: true
 
-# Gemas da Aplicação
-gem 'sinatra'
-gem 'sqlite3'
-gem 'bcrypt'
-gem 'nokogiri'
-gem 'roo'
-gem 'puma'
-gem 'csv'
-gem 'rackup'
+source "https://rubygems.org"
 
-# Gema de Desenvolvimento
-# gem 'rubocop', group: 'development', require: false
-group :development do
-  gem 'ocra'
-end
+gem "sinatra"
+gem "puma"
+gem "sqlite3"
+gem "bcrypt"
+gem "nokogiri"
+gem "csv"
+gem "roo"
+gem 'active_record'
+gem 'fileutils'

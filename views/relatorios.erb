@@ -1,41 +1,67 @@
-<div class="card">
-  <div class="d-flex justify-content-between align-items-center">
-    <h2>Relatório de Estoque Atual</h2>
-    <span class="badge" style="background-color: var(--cor-primaria-claro); color: var(--cor-primaria-escuro); padding: 10px;">
-      Total de Produtos: <%= @total_produtos %>
-    </span>
-  </div>
-  <hr style="margin: 1rem 0;">
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Relatório de Estoque</h2>
+</div>
 
-  <% if @produtos.empty? %>
-    <p>Nenhum produto em estoque para gerar o relatório.</p>
-  <% else %>
-    <div class="table-wrapper">
-      <table>
-        <thead>
+<div class="card mb-4">
+  <div class="card-header">Filtros de Relatório</div>
+  <div class="card-body">
+    <form action="/relatorios" method="GET" class="form-filter">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="filter-codigo" class="form-label">Código:</label>
+          <input type="text" id="filter-codigo" name="codigo" class="form-control" value="<%= h(params[:codigo]) if params[:codigo] %>" placeholder="Buscar por código...">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="filter-categoria" class="form-label">Categoria:</label>
+          <select id="filter-categoria" name="categoria[nome]" class="form-control">
+            <option value="">Todas as Categorias</option>
+            <% @categorias_disponiveis.each do |categoria| %>
+              <option value="<%= h(categoria) %>" <%= 'selected' if params[:categoria] && params[:categoria][:nome] == categoria %>>
+                <%= h(categoria) %>
+              </option>
+            <% end %>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3 d-flex align-items-end">
+          <button type="submit" class="btn btn-primary me-2">Aplicar Filtros</button>
+          <a href="/relatorios" class="btn btn-secondary">Limpar Filtros</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Total de Produtos: <%= @total_produtos %>
+  </div>
+  <div class="table-wrapper">
+    <table id="tabela-relatorios"> <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Código</th>
+      <th>Categoria</th>
+      <th>Qtd.</th>
+      <th>Preço Unit.</th>
+      <th>Valor Total</th>
+    </tr>
+    </thead>
+      <tbody>
+      <% if @produtos.empty? %>
         <tr>
-          <th>Nome</th>
-          <th>Categoria</th>
-          <th class="text-center">Quantidade</th>
-          <th class="text-end">Preço Unitário</th>
-          <th class="text-end">Valor Total</th>
+          <td colspan="6" class="text-center">Nenhum produto encontrado com os filtros aplicados.</td>
         </tr>
-        </thead>
-        <tbody>
+      <% else %>
         <% @produtos.each do |produto| %>
           <tr>
             <td><%= h produto['nome'] %></td>
-            <td><%= h produto['categoria'] %></td>
-            <td class="text-center"><%= produto['quantidade'] %></td>
-            <td class="text-end">R$ <%= '%.2f' % produto['preco'] %></td>
-            <td class="text-end">R$ <%= '%.2f' % (produto['preco'] * produto['quantidade']) %></td>
+            <td class="coluna-codigo"><%= h produto['codigo'] %></td> <td class="coluna-categoria"><%= h produto['categoria'] %></td> <td><%= produto['quantidade'] %></td>
+            <td>R$ <%= '%.2f' % produto['preco'] %></td>
+            <td>R$ <%= '%.2f' % (produto['preco'].to_f * produto['quantidade'].to_i) %></td>
           </tr>
         <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
-  <div class="alert mt-4" style="background-color: var(--cor-info-claro); color: #055160;">
-    <strong>Nota do Mestre:</strong> Esta página agora exibe um relatório completo do seu estoque. O próximo passo em sua jornada será implementar o registro de movimentações diárias para criar relatórios históricos.
+      <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

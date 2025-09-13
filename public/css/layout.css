@@ -1,0 +1,109 @@
+/* public/css/layout.css */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+.dashboard-sidebar {
+    background-color: var(--cor-texto);
+    color: var(--cor-texto-claro);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar-header h3 {
+    color: var(--cor-branco);
+    margin-bottom: 30px;
+    text-align: center;
+}
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar-nav .nav-link {
+    display: block;
+    color: var(--cor-texto-claro);
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+.sidebar-nav .nav-link:hover, .sidebar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+.sidebar-footer {
+    margin-top: auto;
+    text-align: center;
+}
+.dashboard-main {
+    padding: 30px;
+    background-color: var(--cor-fundo);
+    overflow-y: auto;
+}
+.pagina-login {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagina-formulario-fundo {
+    background-color: var(--cor-fundo-escuro);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}
+.flash-message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+}
+.flash-message.success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+.flash-message.error {
+    background-color: #f8d7da;
+    color: #842029;
+}
+.flash-message.info {
+    background-color: #cff4fc;
+    color: #055160;
+}
+
+.d-flex { display: flex; }
+.justify-content-between { justify-content: space-between; }
+.align-items-center { align-items: center; }
+
+.header-actions {
+    margin-top: 20px; /* Ajuste este valor conforme o espaçamento desejado */
+    display: flex; /* Para manter os botões lado a lado */
+    gap: 10px; /* Espaçamento entre os botões */
+}
+
+.sidebar-logo-card {
+    background-color: var(--cor-primaria); /* Cor de destaque, como azul */
+    color: var(--cor-branco);
+    padding: 15px 20px;
+    border-radius: 10px; /* Bordas arredondadas */
+    margin-bottom: 30px; /* Espaço abaixo do card */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+}
+
+.sidebar-logo-card h3 {
+    color: var(--cor-branco); /* Garante que o texto seja branco */
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.dashboard-sidebar .sidebar-header {
+    display: none; /* Ou ajuste para não conflitar com o novo card */
+}

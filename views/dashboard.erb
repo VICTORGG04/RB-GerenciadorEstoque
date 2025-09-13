@@ -1,68 +1,40 @@
-<div class="row mt-4">
-  <!-- Card Valor Total -->
-  <div class="col-md-4 mb-3">
-    <div class="card text-center shadow">
-      <div class="card-body">
-        <h5 class="card-title">Valor Total do Estoque</h5>
-        <p class="display-6 text-success">R$ <%= '%.2f' % @valor_total %></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Card Quantidade Total -->
-  <div class="col-md-4 mb-3">
-    <div class="card text-center shadow">
-      <div class="card-body">
-        <h5 class="card-title">Quantidade Total</h5>
-        <p class="display-6 text-primary"><%= @quantidade_total %></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Card Produtos Adicionados no Mês -->
-  <div class="col-md-4 mb-3">
-    <div class="card text-center shadow">
-      <div class="card-body">
-        <h5 class="card-title">Produtos neste mês</h5>
-        <p class="display-6 text-warning"><%= @produtos.size %></p>
-      </div>
-    </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Dashboard</h2>
+  <div class="header-actions"> <a href="/produtos/novo" class="btn btn-primary">Adicionar Produto</a>
+    <a href="/importar" class="btn btn-success">Importar Produtos</a>
   </div>
 </div>
 
-<!-- Gráfico -->
-<div class="row mt-4">
-  <div class="col-md-12">
-    <div class="card shadow">
-      <div class="card-body">
-        <h5 class="card-title">Valor por Categoria</h5>
-        <canvas id="category-chart" height="120"></canvas>
+<div class="dashboard-main-content">
+  <div class="card mb-3">
+    <div class="card-header">Resumo do Estoque</div>
+    <div class="card-body">
+      <p>Total de Produtos (Itens): <strong><%= @quantidade_total %></strong></p>
+      <p>Valor Total em Estoque: <strong>R$ <%= '%.2f' % @valor_total %></strong></p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-header">Produtos Recentes</div>
+    <div class="table-wrapper">
+      <table>
+      </table>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-header">Análise por Categoria</div>
+    <div class="grafico-carousel-container">
+      <div id="grafico-valor-container" class="grafico-slide active">
+        <h3>Valor Total por Categoria</h3>
+        <canvas id="graficoValorCanvas"></canvas>
       </div>
+      <div id="grafico-quantidade-container" class="grafico-slide">
+        <h3>Quantidade Total por Categoria</h3>
+        <canvas id="graficoQuantidadeCanvas"></canvas>
+      </div>
+      <button id="prev-slide" class="carousel-control prev">&#10094;</button>
+      <button id="next-slide" class="carousel-control next">&#10095;</button>
     </div>
   </div>
 </div>
-
-<script>
-    const ctx = document.getElementById('category-chart');
-    const labels = <%= @valor_por_categoria.map { |item| item['categoria'] }.to_json %>;
-    const data = <%= @valor_por_categoria.map { |item| item['total'] }.to_json %>;
-
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Valor por Categoria',
-                data: data,
-                backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545','#6c757d','#0dcaf0'],
-                borderColor: '#f3f2f2',
-                borderWidth: 2,
-                hoverOffset: 6
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: { legend: { position: 'bottom' } }
-        }
-    });
-</script>

@@ -3,37 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= @titulo || "Sistema de Estoque" %></title>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="/base.css">
-  <link rel="stylesheet" href="/layout.css">
-  <link rel="stylesheet" href="/components.css">
-  <link rel="icon" href="/images/favicon.png" type="image/png">
+  <title>Sistema de Estoque</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="<%= @body_class || '' %>">
-
-<div class="container">
-  <header class="header d-flex justify-content-between align-items-center py-3">
-    <div class="header-title fs-3 fw-bold">📊 Sistema de Estoque</div>
-    <% if logged_in? %>
-      <nav class="navigation d-flex gap-3">
-        <a href="/" class="nav-link <%= request.path == "/" ? "active" : "" %>">Dashboard</a>
-        <a href="/relatorios" class="nav-link">Relatórios</a>
-        <!-- <a href="/historico" class="nav-link">Histórico</a> -->
-        <a href="/logout" class="btn btn-sm btn-danger">Sair</a>
-      </nav>
+<body>
+<div class="dashboard-grid">
+  <aside class="dashboard-sidebar">
+    <div class="sidebar-logo-card">
+      <h3>📊 Sistema de Estoque</h3>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="/" class="nav-link <%= 'active' if request.path_info == '/' %>">Dashboard</a></li>
+        <li><a href="/produtos" class="nav-link <%= 'active' if request.path_info.start_with?('/produtos') %>">Produtos</a></li>
+        <li><a href="/importar" class="nav-link <%= 'active' if request.path_info == '/importar' %>">Importar</a></li>
+        <li><a href="/relatorios" class="nav-link <%= 'active' if request.path_info == '/relatorios' %>">Relatórios</a></li>
+        <li><a href="/movimentacoes" class="nav-link <%= 'active' if request.path_info == '/movimentacoes' %>">Movimentações</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/logout" class="btn btn-danger">Sair</a>
+    </div>
+  </aside>
+  <main class="dashboard-main">
+    <% if params[:sucesso] %>
+      <div class="flash-message success"><%= h(params[:sucesso]) %></div>
     <% end %>
-  </header>
-
-  <main class="mt-4">
+    <% if params[:erro] %>
+      <div class="flash-message error"><%= h(params[:erro]) %></div>
+    <% end %>
+    <% if params[:info] %>
+      <div class="flash-message info"><%= h(params[:info]) %></div>
+    <% end %>
     <%= yield %>
   </main>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/app.js"></script>
+<script src="/js/application.js"></script>
 </body>
 </html>

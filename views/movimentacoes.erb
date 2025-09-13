@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Histórico de Movimentações</h2>
+</div>
+<div class="card">
+  <div class="card-header">
+    Últimos 200 registros
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Produto</th>
+        <th>Tipo</th>
+        <th>Detalhes</th>
+        <th>Data</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if @movimentacoes.empty? %>
+        <tr>
+          <td colspan="5" class="text-center">Nenhuma movimentação registrada.</td>
+        </tr>
+      <% else %>
+        <% @movimentacoes.each do |mov| %>
+          <tr>
+            <td><%= mov['id'] %></td>
+            <td><%= h mov['nome_produto'] %></td>
+            <td><%= h mov['tipo_movimentacao'].capitalize %></td>
+            <td><%= h mov['detalhes'] %></td>
+            <td><%= DateTime.parse(mov['data_movimentacao']).strftime('%d/%m/%Y %H:%M') %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

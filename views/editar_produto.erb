@@ -1,43 +1,31 @@
 <div class="form-card">
-  <div class="form-card-header">
-    <h2>Editar Produto: <%= h @produto['nome'] %></h2>
+  <div class="form-header">
+    <h2>Editar Produto #<%= @produto['id'] %></h2>
   </div>
-
-  <div class="form-card-body">
-    <form action="/produtos/<%= @produto['id'] %>/editar" method="POST">
-
-      <div class="form-group">
-        <label for="nome" class="form-label">Nome do Produto</label>
-        <input type="text" id="nome" name="nome" class="form-input" value="<%= h @produto['nome'] %>" required>
-      </div>
-
-      <div class="form-group">
-        <label for="codigo" class="form-label">Código / SKU</label>
-        <input type="text" id="codigo" name="codigo" class="form-input" value="<%= h @produto['codigo'] %>">
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="quantidade" class="form-label">Quantidade</label>
-          <input type="number" id="quantidade" name="quantidade" class="form-input" value="<%= @produto['quantidade'] %>" required>
-        </div>
-
-        <div class="form-group">
-          <label for="preco" class="form-label">Preço (R$)</label>
-          <input type="text" id="preco" name="preco" class="form-input" value="<%= @produto['preco'] %>" required>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="categoria" class="form-label">Categoria</label>
-        <input type="text" id="categoria" name="categoria" class="form-input" value="<%= h @produto['categoria'] %>">
-      </div>
-
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary btn-submit">Salvar Alterações</button>
-        <a href="/" class="btn-cancel">Cancelar</a>
-      </div>
-
-    </form>
-  </div>
+  <form action="/produtos/<%= @produto['id'] %>/editar" method="POST">
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome do Produto <span style="color:red;">*</span></label>
+      <input type="text" id="nome" name="nome" class="form-control" value="<%= h @produto['nome'] %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="codigo" class="form-label">Código / SKU</label>
+      <input type="text" id="codigo" name="codigo" class="form-control" value="<%= h @produto['codigo'] %>">
+    </div>
+    <div class="mb-3">
+      <label for="quantidade" class="form-label">Quantidade <span style="color:red;">*</span></label>
+      <input type="number" id="quantidade" name="quantidade" class="form-control" value="<%= @produto['quantidade'] %>" required min="0">
+    </div>
+    <div class="mb-3">
+      <label for="preco" class="form-label">Preço (R$) <span style="color:red;">*</span></label>
+      <input type="number" id="preco" name="preco" class="form-control" value="<%= '%.2f' % @produto['preco'] %>" step="0.01" required min="0">
+    </div>
+    <div class="mb-3">
+      <label for="categoria" class="form-label">Categoria</label>
+      <input type="text" id="categoria" name="categoria" class="form-control" value="<%= h @produto['categoria'] %>">
+    </div>
+    <div class="d-flex justify-content-end mt-4">
+      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+      <a href="/produtos" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </form>
 </div>

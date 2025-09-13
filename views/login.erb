@@ -1,19 +1,18 @@
-<div class="login-card form-container">
-  <h2 class="text-center mb-4">Acessar Sistema</h2>
-
-  <% if params[:erro] %>
-    <div class="alert alert-danger">Usuário ou senha inválidos.</div>
-  <% end %>
-
+<div class="login-card">
+  <div class="form-header">
+    <h2>Acessar<br>📊Sistema de Estoque</h2>
+  </div>
   <form action="/login" method="POST">
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="username" name="username" placeholder="Usuário" required>
-      <label for="username">Usuário</label>
+    <div class="mb-3">
+      <label for="username" class="form-label">Usuário</label>
+      <input type="text" id="username" name="username" class="form-control" value="admin" required>
     </div>
-    <div class="form-floating mb-3">
-      <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
-      <label for="password">Senha</label>
+    <div class="mb-3">
+      <label for="password" class="form-label">Senha</label>
+      <input type="password" id="password" name="password" class="form-control" value="admin123" required>
     </div>
-    <button type="submit" class="btn btn-primary w-100 btn-lg">Entrar</button>
+    <div class="d-flex justify-content-center mt-4">
+      <button type="submit" class="btn btn-primary">Entrar</button>
+    </div>
   </form>
 </div>
