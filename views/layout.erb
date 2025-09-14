@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/components.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <%# CDN do Chart.js. Deixe aqui ou no dashboard.erb %>
 </head>
 <body>
 <div class="dashboard-grid">
@@ -17,7 +17,7 @@
     </div>
     <nav class="sidebar-nav">
       <ul>
-        <li><a href="/" class="nav-link <%= 'active' if request.path_info == '/' %>">Dashboard</a></li>
+        <li><a href="/dashboard" class="nav-link <%= 'active' if request.path_info == '/dashboard' || request.path_info == '/' %>">Dashboard</a></li> <%# Ajustei para /dashboard %>
         <li><a href="/produtos" class="nav-link <%= 'active' if request.path_info.start_with?('/produtos') %>">Produtos</a></li>
         <li><a href="/importar" class="nav-link <%= 'active' if request.path_info == '/importar' %>">Importar</a></li>
         <li><a href="/relatorios" class="nav-link <%= 'active' if request.path_info == '/relatorios' %>">Relatórios</a></li>
@@ -29,18 +29,21 @@
     </div>
   </aside>
   <main class="dashboard-main">
+    <%# Recomendo usar um container com ID para as flash messages para o JS em app.js lidar com elas %>
+    <div id="flash-messages-container"></div>
+    <%# O código abaixo é uma forma mais simples, mas o app.js com URLSearchParams é mais robusto %>
     <% if params[:sucesso] %>
-      <div class="flash-message success"><%= h(params[:sucesso]) %></div>
+      <div class="flash-message success mt-3"><%= h(params[:sucesso]) %></div>
     <% end %>
     <% if params[:erro] %>
-      <div class="flash-message error"><%= h(params[:erro]) %></div>
+      <div class="flash-message error mt-3"><%= h(params[:erro]) %></div>
     <% end %>
     <% if params[:info] %>
-      <div class="flash-message info"><%= h(params[:info]) %></div>
+      <div class="flash-message info mt-3"><%= h(params[:info]) %></div>
     <% end %>
     <%= yield %>
   </main>
 </div>
-<script src="/js/application.js"></script>
+<script src="/app.js"></script> <%# <<<<<<<<<<<<<<<< CORRIGIDO AQUI! >>>>>>>>>>>>>>>>>> %>
 </body>
 </html>

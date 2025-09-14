@@ -1,44 +1,94 @@
+<%# views/produtos.erb %>
+
 <div class="d-flex justify-content-between align-items-center mb-4">
-  <h2>Lista de Produtos</h2>
-  <div>
-    <a href="/produtos/novo" class="btn btn-primary">Adicionar</a>
-    <a href="/importar" class="btn btn-success">Importar</a>
-    <button id="btn-editar" class="btn btn-info" disabled>Editar</button>
-    <form id="form-excluir-selecionados" action="/produtos/excluir" method="POST" style="display:inline;">
-      <button id="btn-excluir" class="btn btn-danger" disabled>Excluir</button>
-    </form>
+  <h2>Produtos em Estoque</h2>
+  <div class="d-flex gap-2">
+    <a href="/produtos/novo" class="btn btn-primary">Novo Produto</a>
+    <a href="/importar" class="btn btn-info">Importar</a>
+    <button type="button" class="btn btn-secondary" id="btn-editar-selecionado" disabled>Editar Selecionado</button> <%# NOVO BOTÃO DE EDITAR %>
+    <button type="submit" form="form-excluir-produtos" class="btn btn-danger" id="btn-excluir-selecionados" disabled>Excluir Selecionados</button>
   </div>
 </div>
 
-<div class="card">
-  <div class="table-wrapper">
-    <table>
-      <thead>
-      <tr>
-        <th><input type="checkbox" id="select-all" class="form-check-input"></th>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Código</th>
-        <th>Qtd.</th>
-        <th>Preço Unit.</th>
-        <th>Categoria</th>
-        <th>Data</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @produtos.each do |produto| %>
+<form id="form-excluir-produtos" action="/produtos/excluir" method="POST" style="display:inline;">
+  <div class="table-wrapper card">
+    <div class="card-body">
+      <table>
+        <thead>
         <tr>
-          <td><input type="checkbox" name="produtos_ids[]" value="<%= produto['id'] %>" class="form-check-input produto-checkbox"></td>
-          <td><%= produto['id'] %></td>
-          <td><%= h produto['nome'] %></td>
-          <td><%= h produto['codigo'] %></td>
-          <td><%= produto['quantidade'] %></td>
-          <td>R$ <%= '%.2f' % produto['preco'] %></td>
-          <td><%= h produto['categoria'] %></td>
-          <td><%= Date.parse(produto['data_adicionado']).strftime('%d/%m/%Y') %></td>
+          <th><input type="checkbox" id="selecionar-todos"></th>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Categoria</th>
+          <th>Quantidade</th>
+          <th>Preço</th>
+          <th>Adicionado Em</th>
+          <%# REMOVIDO: Ações (não é mais por linha) %>
         </tr>
-      <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+        <% @produtos.each do |produto| %>
+          <tr>
+            <td><input type="checkbox" name="produtos_ids[]" value="<%= h(produto['id']) %>" class="checkbox-produto"></td>
+            <td><%= h(produto['codigo']) %></td>
+            <td><%= h(produto['nome']) %></td>
+            <td><%= h(produto['categoria']) %></td>
+            <td><%= h(produto['quantidade']) %></td>
+            <td>R$ <%= '%.2f' % h(produto['preco']) %></td>
+            <td><%= h(produto['data_adicionado']) %></td>
+            <%# REMOVIDO: Célula de ações %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</form>
+
+<%# Adicione este script para habilitar/desabilitar os botões de ação e redirecionar para edição %>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const selecionarTodosCheckbox = document.getElementById('selecionar-todos');
+        const produtoCheckboxes = document.querySelectorAll('.checkbox-produto');
+        const btnExcluir = document.getElementById('btn-excluir-selecionados');
+        const btnEditar = document.getElementById('btn-editar-selecionado');
+
+        function toggleActionButtons() {
+            const selecionados = Array.from(produtoCheckboxes).filter(cb => cb.checked);
+            const numSelecionados = selecionados.length;
+
+            // Habilitar/Desabilitar Excluir
+            btnExcluir.disabled = numSelecionados === 0;
+
+            // Habilitar/Desabilitar Editar (apenas se 1 produto for selecionado)
+            btnEditar.disabled = numSelecionados !== 1;
+        }
+
+        selecionarTodosCheckbox.addEventListener('change', function() {
+            produtoCheckboxes.forEach(cb => {
+                cb.checked = this.checked;
+            });
+            toggleActionButtons();
+        });
+
+        produtoCheckboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                if (!this.checked && selecionarTodosCheckbox.checked) {
+                    selecionarTodosCheckbox.checked = false;
+                }
+                toggleActionButtons();
+            });
+        });
+
+        // Listener para o botão Editar Selecionado
+        btnEditar.addEventListener('click', function() {
+            const selecionado = Array.from(produtoCheckboxes).find(cb => cb.checked);
+            if (selecionado) {
+                window.location.href = `/produtos/${selecionado.value}/editar`;
+            }
+        });
+
+        // Inicializar estado dos botões ao carregar a página
+        toggleActionButtons();
+    });
+</script>

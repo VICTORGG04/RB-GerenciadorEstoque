@@ -1,5 +1,6 @@
 /* public/css/base.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 :root {
     --cor-primaria: rgba(33, 37, 41, 0.91);
     --cor-sucesso: #198754;
@@ -7,7 +8,7 @@
     --cor-aviso: #ffc107;
     --cor-info: #0dcaf0;
     --cor-secundaria: #6c757d;
-    --cor-fundo: #f4f6f9;
+    --cor-fundo: #f4f6f9; /* Cor de fundo padrão para outras páginas */
     --cor-fundo-escuro: #e9ecef;
     --cor-texto: #212529;
     --cor-texto-claro: #ffffff;
@@ -16,19 +17,31 @@
     --cor-preto: #000000;
     --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.07);
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; /* Garante que o html e o body ocupem a altura total da viewport */
+}
+
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--cor-fundo);
+    background-color: var(--cor-fundo); /* Fundo padrão. Será sobrescrito pela classe 'pagina-formulario-fundo' quando presente. */
     color: var(--cor-texto);
     line-height: 1.6;
-    min-height: 100vh;
+    min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
 }
+
 a {
     color: var(--cor-primaria);
     text-decoration: none;
     transition: color 0.2s;
 }
+
 a:hover {
-    color: #fcfcfc;
+    color: var(--cor-secundaria); /* Alterado para uma cor mais visível em fundos variados */
 }
