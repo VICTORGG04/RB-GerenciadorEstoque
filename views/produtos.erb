@@ -4,8 +4,7 @@
   <h2>Produtos em Estoque</h2>
   <div class="d-flex gap-2">
     <a href="/produtos/novo" class="btn btn-primary mb-6">Novo Produto</a>
-    <a href="/importar" class="btn btn-info mb-6">Importar</a>
-    <button type="button" class="btn btn-secondary mb-6" id="btn-editar-selecionado" disabled>Editar Selecionado</button> <%# NOVO BOTÃO DE EDITAR %>
+    <button type="button" class="btn btn-secondary mb-6" id="btn-editar-selecionado" disabled>Editar Selecionado</button>
     <button type="submit" form="form-excluir-produtos" class="btn btn-danger" id="btn-excluir-selecionados" disabled>Excluir Selecionados</button>
   </div>
 </div>
@@ -22,7 +21,6 @@
           <th>Quantidade</th>
           <th>Preço</th>
           <th>Adicionado Em</th>
-          <%# REMOVIDO: Ações (não é mais por linha) %>
         </tr>
         </thead>
         <tbody>
@@ -35,7 +33,6 @@
             <td><%= h(produto['quantidade']) %></td>
             <td>R$ <%= '%.2f' % h(produto['preco']) %></td>
             <td><%= h(produto['data_adicionado']) %></td>
-            <%# REMOVIDO: Célula de ações %>
           </tr>
         <% end %>
         </tbody>
@@ -43,6 +40,7 @@
     </div>
   </div>
 </form>
+
 
 <%# Adicione este script para habilitar/desabilitar os botões de ação e redirecionar para edição %>
 <script>

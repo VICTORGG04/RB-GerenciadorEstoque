@@ -8,13 +8,13 @@
     --cor-perigo: #dc3545;
     --cor-aviso: #ffc107;
     --cor-info: #0dcaf0;
-    --cor-fundo: #f4f6f9;
-    --cor-fundo-card: #ffffff;
+    --cor-fundo: #d9d9d9;
+    --cor-fundo-card: rgb(255, 254, 254);
     --cor-fundo-card2: rgba(180, 179, 179, 0.54);
     --cor-fundo-sidebar: #212529; /* Darker sidebar */
     --cor-texto: #212529;
     --cor-texto-claro: #f8f9fa;
-    --cor-borda: #dee2e6;
+    --cor-borda: #a8a5a5;
     --sombra-suave: 0 4px 12px rgba(0, 0, 0, 0.08);
     --cor-branco: #ffffff; /* Adicionado para clareza */
     --cor-botaoNovo_produto_texto: #193c98;
