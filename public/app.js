@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 1. Lógica de Flash Messages (Mantida)
     // =========================================================================
     function showFlashMessage(message, type) {
-        // ... (código existente)
     }
     setTimeout(() => {
         const flashes = document.querySelectorAll('.flash-message');
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const { valorPorCategoria, quantidadePorCategoria, topProdutos, movimentacoesBaixa } = window.chartData;
 
-        // MESTRE: Paletas de cores profissionais e temáticas
+        // GRÁFICO: Paletas de cores temáticas
         const paletaValor = ['#4f46e5', '#7c3aed', '#db2777', '#f59e0b', '#10b981'];
         const paletaQuantidade = ['#0891b2', '#0ea5e9', '#6366f1', '#a78bfa', '#f472b6'];
         const paletaQuantidadeProdutos =['#08b238', '#bae90e', '#e363f1', '#720859', '#f472b6']
@@ -82,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }]
                 },
                 options: {
-                    indexAxis: 'y', // MESTRE: Transforma em barras horizontais
+                    indexAxis: 'y', // Transforma em barras horizontais
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
@@ -123,8 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-
-    // ... (O resto do seu código para as páginas de Produtos e Relatórios continua o mesmo)
     function setupProdutoPage() { /* ... */ }
     function setupRelatoriosPage() { /* ... */ }
 

@@ -24,7 +24,7 @@ set :database, File.join(File.dirname(__FILE__), "estoque.db")
 def get_data_from_sheet
   scope = Google::Apis::SheetsV4::AUTH_SPREADSHEETS_READONLY
 
-  # Caminho para o arquivo de credenciais que você salvou no projeto
+  # Caminho para o arquivo de credenciais do projeto
   credentials_path = File.join(File.dirname(__FILE__), 'credentials.json')
 
   # Verifica se o arquivo existe para evitar erros
@@ -48,7 +48,7 @@ def get_data_from_sheet
 
   response = service.get_spreadsheet_values(spreadsheet_id, range)
 
-  # transforma em hashes compatíveis com seus produtos
+  # transforma em hashes compatíveis no produtos
   (response.values || []).map do |row|
     {
       codigo:     row[0],
@@ -59,7 +59,7 @@ def get_data_from_sheet
     }
   end
 end
-# Importa os produtos lidos da planilha para o banco (upsert). Retorna um hash com contadores e erros.
+# Importa os produtos lidos da planilha para o banco. Retorna um hash com contadores e erros.
 def importar_produtos_da_planilha
   rows = get_data_from_sheet
   result = { inseridos: 0, atualizados: 0, ignorados: 0, erros: [] }
@@ -77,11 +77,11 @@ def importar_produtos_da_planilha
       existing = db.get_first_row("SELECT * FROM produtos WHERE codigo = ?", codigo)
 
       if existing
-        # Atualiza somente se houver mudança (evita movimentações redundantes)
+        # Atualiza somente se houver mudança.
         if existing['nome'] != nome || existing['preco'].to_f != preco || existing['categoria'].to_s != categoria.to_s || existing['quantidade'].to_i != quantidade
           db.execute("UPDATE produtos SET nome = ?, quantidade = ?, preco = ?, categoria = ?, data_atualizado = CURRENT_TIMESTAMP WHERE id = ?",
                      nome, quantidade, preco, categoria, existing['id'])
-          # registra movimentação para diferença de quantidade
+          # registra movimentação para diferença de quantidade.
           if existing['quantidade'].to_i != quantidade
             tipo = quantidade > existing['quantidade'].to_i ? 'entrada' : 'baixa'
             quantidade_movimentada = (quantidade - existing['quantidade'].to_i).abs
@@ -278,7 +278,6 @@ get '/dashboard' do
 end
 
 # --- Rotas para integração com Google Sheets ---
-# Página simples que mostra um botão para importar (pode ser usada em views)
 get '/sheets' do
   erb :sheets_import, layout: :layout
 end
@@ -340,9 +339,6 @@ post '/produtos/novo' do
     redirect '/produtos/novo'
   end
 end
-
-
-#EDITADO POR VICTOR
 get '/produtos/:id/editar' do
   @produto = db.get_first_row("SELECT * FROM produtos WHERE id = ?", [params[:id]])
   redirect '/produtos' unless @produto
