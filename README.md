@@ -87,13 +87,13 @@ ruby app.rb
 ## 📸 Capturas de Tela
 
 ### Tela de Login
-![Tela de Login](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Login.png)
+<img src="https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Login.png" alt="Tela de Login" width="700">
 
 ### Dashboard Principal (Sem Dados)
-![Dashboard Principal](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Main.png)
+<img src="https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Main.png" alt="Dashboard Principal" width="700">
 
 ### Dashboard com Dados
-![Dashboard com Dados](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Dados.png)
+<img src="https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Dados.png" alt="Dashboard com Dados" width="700">
 
 ---
 
