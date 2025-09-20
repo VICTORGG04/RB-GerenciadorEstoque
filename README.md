@@ -19,7 +19,6 @@ A aplicação permite realizar operações como cadastro, edição, exclusão e 
 - **Cadastro de novos produtos**
 - **Edição de informações existentes**
 - **Exclusão de múltiplos produtos**
-- **Exportação de dados em CSV**
 - **Integração com Google Sheets** para consulta e atualização de dados online
 - **Gráficos interativos** por categoria, quantidade e valor
 
@@ -30,7 +29,6 @@ A aplicação permite realizar operações como cadastro, edição, exclusão e 
 - **Ruby** – Linguagem principal
 - **FXRuby** – Interface gráfica
 - **SQLite** – Banco de dados local
-- **CSV** – Exportação de dados
 - **Google Sheets API** – Sincronização e exportação online
 
 ---
