@@ -89,8 +89,8 @@ ruby app.rb
 ### Tela de Login
 ![Tela de Login](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/master/Projeto-Imagens-Pronto/Captura-de-tela-Login.png)
 
-### Dashboard Principal
-![Dashboard Principal](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/master/Projeto-Imagens-Pronto/Captura-de-tela-Main.png)
+### Dashboard Relatório
+![Dashboard Relatorio](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/master/Projeto-Imagens-Pronto/Captura-de-tela-Relatorio.png)
 
 ### Dashboard com Dados
 ![Dashboard com Dados](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/master/Projeto-Imagens-Pronto/Captura-de-tela-Dados.png)
