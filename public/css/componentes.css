@@ -90,7 +90,7 @@ tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-/* MESTRE: Correção definitiva para o tamanho dos gráficos */
+/* EMERGÊNCIA: Correção definitiva para o tamanho dos gráficos */
 .grafico-container {
     position: relative;
     /* Altura ajustada e ideal para os gráficos no dashboard */
