@@ -1,0 +1,138 @@
+/* public/componentes.css */
+
+/* Botões */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-suave);
+}
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.btn-primary { background-color: var(--cor-primaria); color: var(--cor-branco); }
+.btn-success { background-color: var(--cor-sucesso); color: var(--cor-branco); }
+.btn-danger { background-color: var(--cor-perigo); color: var(--cor-branco); }
+.btn-info { background-color: var(--cor-info); color: var(--cor-branco); }
+
+/* Cards (Boxes) */
+.card {
+    background-color: var(--cor-fundo-card);
+    border-radius: 8px;
+    box-shadow: var(--sombra-suave);
+    border: 1px solid var(--cor-borda);
+}
+.card-header {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid var(--cor-borda);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.card-body {
+    padding: 20px;
+}
+
+/* Formulários */
+.login-card, .form-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    width: 100%;
+    backdrop-filter: blur(4px);
+}
+.login-card { max-width: 400px; }
+.form-card { max-width: 700px; }
+.form-header { text-align: center; margin-bottom: 25px; }
+.form-header h2 { font-weight: 700; }
+.form-label { font-weight: 500; margin-bottom: 5px; display: block; }
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+/* Tabelas */
+.table-wrapper {
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--cor-borda);
+}
+thead th {
+    background-color: var(--cor-fundo);
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+}
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* MESTRE: Correção definitiva para o tamanho dos gráficos */
+.grafico-container {
+    position: relative;
+    /* Altura ajustada e ideal para os gráficos no dashboard */
+    height: 280px;
+    width: 70%;
+}
+
+/* Flash Messages */
+#flash-messages-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 300px;
+}
+.flash-message {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.flash-message.success { background-color: #d1e7dd; color: #0f5132; }
+.flash-message.error { background-color: #f8d7da; color: #842029; }
+.flash-message.info { background-color: #cff4fc; color: #055160; }
+
+tr.mov-adicionado {
+    /* Fundo verde bem suave para entradas */
+    background-color: rgba(25, 135, 84, 0.1) !important;
+}
+tr.mov-removido {
+    /* Fundo vermelho bem suave para saídas */
+    background-color: rgba(220, 53, 69, 0.1) !important;
+}
+tr.mov-editado {
+    /* Fundo laranja bem suave para ajustes */
+    background-color: rgba(255, 193, 7, 0.15) !important;
+}
+
+/* Mantém o efeito de hover, mas um pouco mais escuro para dar contraste */
+tbody tr.mov-adicionado:hover,
+tbody tr.mov-removido:hover,
+tbody tr.mov-editado:hover {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}

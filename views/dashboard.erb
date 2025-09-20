@@ -1,40 +1,133 @@
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h2>Dashboard</h2>
-  <div class="header-actions"> <a href="/produtos/novo" class="btn btn-primary">Adicionar Produto</a>
-    <a href="/importar" class="btn btn-success">Importar Produtos</a>
+<%# views/dashboard.erb %>
+<div class="container-fluid mt-4">
+  <% if @sucesso = get_flash(:sucesso) %>
+    <div class="flash-message success" role="alert"><%= h @sucesso %></div>
+  <% end %>
+  <% if @erro = get_flash(:erro) %>
+    <div class="flash-message error" role="alert"><%= h @erro %></div>
+  <% end %>
+  <% if @info = get_flash(:info) %>
+    <div class="flash-message info" role="alert"><%= h @info %></div>
+  <% end %>
+
+  <h1 class="mb-4">Dashboard de Estoque</h1>
+
+  <div class="row">
+
+    <div class="col-lg-4">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Resumo Geral</h5>
+          <p class="card-text"><strong>Total de Itens em Estoque:</strong> <%= @quantidade_total %></p>
+          <p class="card-text"><strong>Valor Total do Estoque:</strong> R$ <%= sprintf('%.2f', @valor_total) %></p>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Top 5 Produtos em Estoque</h5>
+          <% if @top_produtos && !@top_produtos.empty? %>
+            <div class="grafico-container">
+              <canvas id="graficoBarrasTopProdutos"></canvas>
+            </div>
+          <% else %>
+            <p class="text-center text-muted mt-3">Nenhum dado para exibir.</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow-sm mb-4">
+            <div class="card-body">
+              <h5 class="card-title">Movimentações de Baixa (Últimos 30 dias)</h5>
+              <% if @movimentacoes_baixa_dia && !@movimentacoes_baixa_dia.empty? %>
+                <div class="grafico-container">
+                  <canvas id="graficoLinhaBaixas"></canvas>
+                </div>
+              <% else %>
+                <p class="text-center text-muted mt-3">Nenhuma baixa recente para exibir.</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title">Valor por Categoria</h5>
+              <% if @valor_por_categoria && !@valor_por_categoria.empty? %>
+                <div class="grafico-container">
+                  <canvas id="graficoValorCanvas"></canvas>
+                </div>
+              <% else %>
+                <p class="text-center text-muted mt-3">Nenhum dado para exibir.</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title">Quantidade por Categoria</h5>
+              <% if @quantidade_por_categoria && !@quantidade_por_categoria.empty? %>
+                <div class="grafico-container">
+                  <canvas id="graficoQuantidadeCanvas"></canvas>
+                </div>
+              <% else %>
+                <p class="text-center text-muted mt-3">Nenhum dado para exibir.</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Produtos Recentes</h3>
+          <div class="table-responsive">
+            <table class="table table-hover table-sm">
+              <thead>
+              <tr><th>Código</th><th>Nome</th><th>Quantidade</th><th>Preço</th><th>Categoria</th><th>Adicionado em</th></tr>
+              </thead>
+              <tbody>
+              <% if @produtos_recentes && !@produtos_recentes.empty? %>
+                <% @produtos_recentes.each do |produto| %>
+                  <tr>
+                    <td><%= h produto['codigo'] %></td>
+                    <td><%= h produto['nome'] %></td>
+                    <td><%= h produto['quantidade'] %></td>
+                    <td>R$ <%= sprintf('%.2f', produto['preco']) %></td>
+                    <td><%= h produto['categoria'] %></td>
+                    <td><%= h produto['data_adicionado_formatada'] %></td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr><td colspan="6" class="text-center text-muted">Nenhum produto recente.</td></tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="dashboard-main-content">
-  <div class="card mb-3">
-    <div class="card-header">Resumo do Estoque</div>
-    <div class="card-body">
-      <p>Total de Produtos (Itens): <strong><%= @quantidade_total %></strong></p>
-      <p>Valor Total em Estoque: <strong>R$ <%= '%.2f' % @valor_total %></strong></p>
-    </div>
-  </div>
-
-  <div class="card mb-3">
-    <div class="card-header">Produtos Recentes</div>
-    <div class="table-wrapper">
-      <table>
-      </table>
-    </div>
-  </div>
-
-  <div class="card mb-3">
-    <div class="card-header">Análise por Categoria</div>
-    <div class="grafico-carousel-container">
-      <div id="grafico-valor-container" class="grafico-slide active">
-        <h3>Valor Total por Categoria</h3>
-        <canvas id="graficoValorCanvas"></canvas>
-      </div>
-      <div id="grafico-quantidade-container" class="grafico-slide">
-        <h3>Quantidade Total por Categoria</h3>
-        <canvas id="graficoQuantidadeCanvas"></canvas>
-      </div>
-      <button id="prev-slide" class="carousel-control prev">&#10094;</button>
-      <button id="next-slide" class="carousel-control next">&#10095;</button>
-    </div>
-  </div>
-</div>
+<script>
+    // Injeta os dados para o app.js
+    window.chartData = {
+        valorPorCategoria: <%= (@valor_por_categoria || []).to_json %>,
+        quantidadePorCategoria: <%= (@quantidade_por_categoria || []).to_json %>,
+        topProdutos: <%= (@top_produtos || []).to_json %>,
+        movimentacoesBaixa: <%= (@movimentacoes_baixa_dia || []).to_json %>
+    };
+</script>

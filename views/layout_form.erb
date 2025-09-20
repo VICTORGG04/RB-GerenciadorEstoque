@@ -1,20 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Estoque - Formulário</title>
+  <title>Formulário - Sistema de Estoque</title>
   <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
 </head>
-<body class="<%= @body_class || '' %>">
+<body class="pagina-formulario-fundo">
 <div id="flash-messages-container"></div>
-
-<main class="content-wrapper"> <%# Renomeei para 'content-wrapper' para ser mais genérico %>
-  <%= yield %>
-</main>
-
+<%= yield %>
 <script src="/app.js"></script>
 </body>
 </html>

@@ -1,67 +1,83 @@
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h2>Relatório de Estoque</h2>
-</div>
-
-<div class="card mb-4">
-  <div class="card-header">Filtros de Relatório</div>
-  <div class="card-body">
-    <form action="/relatorios" method="GET" class="form-filter">
-      <div class="row">
-        <div class="col-md-4 mb-3">
-          <label for="filter-codigo" class="form-label">Código:</label>
-          <input type="text" id="filter-codigo" name="codigo" class="form-control" value="<%= h(params[:codigo]) if params[:codigo] %>" placeholder="Buscar por código...">
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="filter-categoria" class="form-label">Categoria:</label>
-          <select id="filter-categoria" name="categoria[nome]" class="form-control">
-            <option value="">Todas as Categorias</option>
-            <% @categorias_disponiveis.each do |categoria| %>
-              <option value="<%= h(categoria) %>" <%= 'selected' if params[:categoria] && params[:categoria][:nome] == categoria %>>
-                <%= h(categoria) %>
-              </option>
-            <% end %>
-          </select>
-        </div>
-        <div class="col-md-4 mb-3 d-flex align-items-end justify-content-start gap-3">
-          <button type="submit" class="btn btn-primary flex-fill btn-aplicar-filtro-especifico">Aplicar Filtros</button>
-          <a href="/relatorios" class="btn btn-secondary flex-fill">Limpar Filtros</a>
-        </div>
-      </div>
-    </form>
+<div class="dashboard-main">
+  <div id="flash-messages-container">
+    <% if @sucesso %>
+      <div class="flash-message success mt-3"><%= h(@sucesso) %></div>
+    <% end %>
+    <% if @erro %>
+      <div class="flash-message error mt-3"><%= h(@erro) %></div>
+    <% end %>
+    <% if @info %>
+      <div class="flash-message info mt-3"><%= h(@info) %></div>
+    <% end %>
   </div>
-</div>
 
-<div class="card">
-  <div class="card-header">
-    Total de Produtos: <%= @total_produtos %>
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2>Relatório de Estoque</h2>
+    </div>
+    <div class="card-body">
+      <h3>Filtros de Relatório</h3>
+      <form action="/relatorios" method="get">
+        <div class="row align-items-end mb-3">
+          <div class="col-md-6 mb-3">
+            <label for="codigo" class="form-label">Código:</label>
+            <input type="text" id="codigo" name="codigo" class="form-control" value="<%= h(params[:codigo]) %>" placeholder="Buscar por código...">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="categoria" class="form-label">Categoria:</label>
+            <select id="categoria" name="categoria" class="form-control">
+              <% @categorias_disponiveis.each do |cat| %>
+                <option value="<%= h(cat) %>" <%= 'selected' if params[:categoria] == cat %>><%= h(cat) %></option>
+              <% end %>
+              <% if @categorias_disponiveis.empty? || !@categorias_disponiveis.include?("Todas") %>
+                <option value="Todas" <%= 'selected' if params[:categoria] == "Todas" %> >Todas</option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button type="submit" class="btn btn-primary btn-filter mb-4 mb-5">Aplicar Filtros</button>
+          <a href="/relatorios" class="btn btn-secondary btn-filter mb-4">Limpar Filtros</a>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="table-wrapper">
-    <table id="tabela-relatorios"> <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Código</th>
-      <th>Categoria</th>
-      <th>Qtd.</th>
-      <th>Preço Unit.</th>
-      <th>Valor Total</th>
-    </tr>
-    </thead>
-      <tbody>
-      <% if @produtos.empty? %>
-        <tr>
-          <td colspan="6" class="text-center">Nenhum produto encontrado com os filtros aplicados.</td>
-        </tr>
+
+  <div class="card">
+    <div class="card-header">
+      <h3>Total de Produtos: <%= @produtos_filtrados.count %></h3>
+    </div>
+    <div class="card-body">
+      <% if @produtos_filtrados.empty? %>
+        <p class="text-center">Nenhum produto encontrado com os filtros aplicados.</p>
       <% else %>
-        <% @produtos.each do |produto| %>
-          <tr>
-            <td><%= h produto['nome'] %></td>
-            <td class="coluna-codigo"><%= h produto['codigo'] %></td> <td class="coluna-categoria"><%= h produto['categoria'] %></td> <td><%= produto['quantidade'] %></td>
-            <td>R$ <%= '%.2f' % produto['preco'] %></td>
-            <td>R$ <%= '%.2f' % (produto['preco'].to_f * produto['quantidade'].to_i) %></td>
-          </tr>
-        <% end %>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Código</th>
+              <th>Categoria</th>
+              <th>Qtd.</th>
+              <th>Preço Unit.</th>
+              <th>Valor Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @produtos_filtrados.each do |produto| %>
+              <tr>
+                <td><%= h(produto['nome']) %></td>
+                <td><%= h(produto['codigo']) %></td>
+                <td><%= h(produto['categoria']) %></td>
+                <td><%= h(produto['quantidade']) %></td>
+                <td>R$ <%= '%.2f' % produto['preco'] %></td>
+                <td>R$ <%= '%.2f' % (produto['quantidade'] * produto['preco']) %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
       <% end %>
-      </tbody>
-    </table>
+    </div>
   </div>
 </div>
