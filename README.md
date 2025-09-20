@@ -86,7 +86,7 @@ ruby app.rb
 
 ## 📸 Capturas de Tela
 
-![Tela Principal](https://github.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Dados.png)
+![Tela Principal](https://github.com/VICTORGG04/RB-GerenciadorEstoque/main/Captura-de-tela-Dados.png)
 *Interface gráfica do sistema.*
 
 ---
