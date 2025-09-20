@@ -86,8 +86,14 @@ ruby app.rb
 
 ## 📸 Capturas de Tela
 
-![Tela Principal](https://github.com/VICTORGG04/RB-GerenciadorEstoque/main/Captura-de-tela-Dados.png)
-*Interface gráfica do sistema.*
+### Tela de Login
+![Tela de Login](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Login.png)
+
+### Dashboard Principal (Sem Dados)
+![Dashboard Principal](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Main.png)
+
+### Dashboard com Dados
+![Dashboard com Dados](https://raw.githubusercontent.com/VICTORGG04/RB-GerenciadorEstoque/main/Projeto-Imagens-Pronto/Captura-de-tela-Dados.png)
 
 ---
 
