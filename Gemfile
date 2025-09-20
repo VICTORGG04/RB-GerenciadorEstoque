@@ -9,5 +9,6 @@ gem "bcrypt"
 gem "nokogiri"
 gem "csv"
 gem "roo"
-gem 'active_record'
 gem 'fileutils'
+gem 'roo-xls'
+gem 'google-api-client'
