@@ -1,86 +1,121 @@
-# 📦 RB-GerenciadorEstoque
+## 🛠️ RB-GerenciadorEstoque
 
-O **RB-GerenciadorEstoque** é um sistema desktop desenvolvido em **Ruby** com **FXRuby** para gerenciar produtos em estoque. Ele permite adicionar, editar, excluir e exportar produtos para CSV, além de gerar gráficos interativos que exibem **quantidade e valor por categoria**.
-
----
-
-## 🚀 Funcionalidades
-
-- ✅ Cadastro de novos produtos  
-- ✅ Edição de informações existentes  
-- ✅ Exclusão de múltiplos produtos  
-- ✅ Exportação de dados em formato CSV  
-- ✅ Visualização de gráficos dinâmicos:
-  - Quantidade por categoria  
-  - Valor por categoria (R$)  
-- ✅ Alternância automática entre os gráficos a cada 20 segundos  
+[![Ruby](https://img.shields.io/badge/Ruby-CC342D?style=flat-square&logo=ruby&logoColor=white)](https://www.ruby-lang.org/)
+[![FXRuby](https://img.shields.io/badge/FXRuby-6DB33F?style=flat-square&logo=ruby&logoColor=white)](https://www.fxruby.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 📌 Descrição
 
-- **Ruby 💎** – Linguagem principal  
-- **FXRuby 🎨** – Biblioteca gráfica para interfaces desktop  
-- **SQLite 🗄️** – Banco de dados leve e integrado  
-- **CSV 📑** – Exportação de dados  
-- **Gruff 📊** – Geração de gráficos (barras)  
+O **RB-GerenciadorEstoque** é um sistema desktop desenvolvido em Ruby com FXRuby, destinado à gestão eficiente de produtos em estoque.  
+A aplicação permite realizar operações como cadastro, edição, exclusão e exportação de produtos para **CSV** ou **Google Sheets**, além de gerar gráficos interativos que exibem a quantidade e o valor dos produtos por categoria.
 
 ---
 
-## 📂 Estrutura do Projeto
+## ✅ Funcionalidades
 
-RB-GerenciadorEstoque/  
-│  
-├── app.rb              # Arquivo principal da aplicação  
-├── cria_usuario.rb     # Script para criação de usuário  
-├── gera_hash.rb        # Geração de hash para segurança  
-├── estoque.db          # Banco de dados SQLite  
-├── Gemfile             # Dependências do projeto  
-├── Gemfile.lock        # Bloqueio de versões das gems  
-├── migracao_relatorios.rb # Script para migração de relatórios  
-├── views/              # Arquivos de visualização  
-├── public/             # Arquivos públicos (CSS, JS, imagens)  
-└── vendor/             # Dependências externas  
+- **Cadastro de novos produtos**
+- **Edição de informações existentes**
+- **Exclusão de múltiplos produtos**
+- **Exportação de dados em CSV**
+- **Integração com Google Sheets** para consulta e atualização de dados online
+- **Gráficos interativos** por categoria, quantidade e valor
 
 ---
 
-## ⚙️ Instalação
+## 🧰 Tecnologias Utilizadas
 
-### 1. Clone o repositório
+- **Ruby** – Linguagem principal
+- **FXRuby** – Interface gráfica
+- **SQLite** – Banco de dados local
+- **CSV** – Exportação de dados
+- **Google Sheets API** – Sincronização e exportação online
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+
+RB-GerenciadorEstoque/
+├── app.rb                # Arquivo principal
+├── cria\_usuario.rb       # Criação de usuários
+├── gera\_hash.rb          # Geração de hashes
+├── migracao\_relatorios.rb # Migração de dados
+├── estoque.db            # Banco de dados SQLite
+├── Gemfile               # Dependências
+├── README.md             # Documentação
+├── public/               # Arquivos públicos
+├── vendor/cache/         # Cache de dependências
+└── views/                # Arquivos de visualização
+
+````
+
+---
+
+## 📥 Como Rodar
+
+1. Clone o repositório:
+
 ```bash
 git clone https://github.com/VICTORGG04/RB-GerenciadorEstoque.git
 cd RB-GerenciadorEstoque
-2. Instale as dependências
-bash
-Copiar código
+````
+
+2. Instale as dependências:
+
+```bash
 bundle install
-3. Execute a aplicação
-bash
-Copiar código
-ruby app.rb
-🎮 Como Usar
-Ao iniciar, a tela principal exibirá a tabela de produtos cadastrados.
-
-Utilize os botões laterais para:
-
-Adicionar Produto
-
-Editar Produto
-
-Excluir Produto(s)
-
-Exportar CSV
-
-Os gráficos de categorias ficam visíveis no painel inferior e alternam automaticamente a cada 20 segundos.
 ```
 
+3. Execute a aplicação:
 
-## 🤝 Contribuição
-Sinta-se à vontade para abrir issues e enviar pull requests com melhorias ou correções.
+```bash
+ruby app.rb
+```
 
-## 📬 Contato
-Autor: Victor Marcial
+4. **Exportação para Google Sheets**
 
-LinkedIn: https://www.linkedin.com/in/victor-marcial-7ab310373?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+* Configure a API do Google Sheets com credenciais JSON.
+* Insira o arquivo de credenciais na pasta `config/` (ou local definido no código).
+* Utilize o script de exportação para enviar dados do estoque para sua planilha online.
 
-Email: Victor.marcial.124@ufrn.edu.br
+---
+
+## 📸 Capturas de Tela
+
+![Tela Principal](https://github.com/VICTORGG04/RB-GerenciadorEstoque/blob/main/screenshot.png)
+*Interface gráfica do sistema.*
+
+---
+
+## 📈 Gráficos Interativos
+
+A aplicação gera gráficos que permitem visualizar rapidamente a **quantidade** e o **valor** dos produtos por categoria, facilitando o controle do estoque.
+
+---
+
+## 💡 Contribuições
+
+Contribuições são bem-vindas!
+Abra uma **issue** ou envie um **pull request** para sugerir melhorias.
+
+---
+
+## 📝 Licença
+
+Este projeto está sob a licença [MIT](LICENSE).
+
+---
+
+## 🔗 Links Úteis
+
+* [Ruby](https://www.ruby-lang.org/)
+* [FXRuby](https://www.fxruby.org/)
+* [SQLite](https://www.sqlite.org/)
+* [Google Sheets API](https://developers.google.com/sheets/api)
+
+---
+
