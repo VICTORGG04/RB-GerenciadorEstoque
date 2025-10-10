@@ -27,7 +27,6 @@ A aplicação permite realizar operações como cadastro, edição, exclusão e 
 ## 🧰 Tecnologias Utilizadas
 
 - **Ruby** – Linguagem principal
-- **FXRuby** – Interface gráfica
 - **SQLite** – Banco de dados local
 - **Google Sheets API** – Sincronização e exportação online
 
@@ -117,7 +116,6 @@ Este projeto está sob a licença [MIT](LICENSE).
 ## 🔗 Links Úteis
 
 * [Ruby](https://www.ruby-lang.org/)
-* [FXRuby](https://www.fxruby.org/)
 * [SQLite](https://www.sqlite.org/)
 * [Google Sheets API](https://developers.google.com/sheets/api)
 
